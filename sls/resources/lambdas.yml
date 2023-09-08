@@ -1,0 +1,27 @@
+healthieSchedule:
+  handler: index.handler
+  name: ${self:custom.appNameU}HealthieSchedule-${self:custom.env}
+  description: This lambda works with with Healthie schedule
+  runtime: nodejs18.x
+  timeout: 60
+  role: arn:aws:iam::#{AWS::AccountId}:role/RomeGodRole
+  environment:
+    region: ${self:custom.region}
+  tags:
+    BAName: ${self:custom.baName}
+    OwnerContact: ${self:custom.ownerContact}
+    Company: ${self:custom.company}
+    Cost Center: ${self:custom.costCenter}
+  # layers:
+  #   - arn:aws:lambda:${self:custom.region}:#{AWS::AccountId}:layer:openAI:1
+  #   - arn:aws:lambda:${self:custom.region}:#{AWS::AccountId}:layer:pdfParse:3
+  package:
+    include:
+      - dist/**
+    artifact: ./dist/healthieSchedule.zip
+    individually: true
+  # events:
+  #   - http:
+  #       path: api/v1/write-my-cover-letter
+  #       method: post
+

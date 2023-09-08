@@ -1,0 +1,52 @@
+{
+  "name": "healthie-schedule",
+  "version": "1.0.0",
+  "description": "",
+  "type": "module",
+  "main": "./dist/index.js",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "tsup": "tsup",
+    "prebuild": "rm -rf dist && mkdir dist",
+    "build": "tsup",
+    "start": "tsx -r dotenv/config src/index.ts",
+    "start:crawl": "tsx -r src/crawl.ts",
+    "lint": "eslint src",
+    "lint:fix": "npm run lint --fix",
+    "format": "prettier --write \"**/*.ts\"",
+    "format:check": "prettier --list-different \"**/*.ts\"",
+    "zipit": "bash utils/zipit.sh",
+    "package": "npx turbo run build && npm run zipit",
+    "predeploy": "npm run package",
+    "deploy": "aws lambda update-function-code --region us-east-1 --function-name -Dev --zip-file fileb://healthieSchedule.zip"
+  },
+  "keywords": [
+    "langchain",
+    "starter",
+    "template",
+    "node",
+    "typescript",
+    "llm"
+  ],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "@tsconfig/recommended": "^1.0.2",
+    "@types/js-yaml": "^4",
+    "@types/node": "^18.16.19",
+    "@typescript-eslint/eslint-plugin": "^5.51.0",
+    "@typescript-eslint/parser": "^5.51.0",
+    "eslint": "^8.33.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-config-prettier": "^8.6.0",
+    "eslint-import-resolver-typescript": "^3.5.5",
+    "eslint-plugin-import": "^2.27.5",
+    "eslint-plugin-prettier": "^4.2.1",
+    "prettier": "^2.8.3",
+    "tsup": "^6.7.0",
+    "tsx": "^3.12.3",
+    "typescript": "^5.1.6"
+  }
+}

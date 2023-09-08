@@ -1,0 +1,27 @@
+name: ${self:custom.appNameU}Appsync-${self:custom.env}
+authenticationType: API_KEY
+additionalAuthenticationProviders:
+  - authenticationType: AWS_IAM
+dataSources:
+  - type: AMAZON_DYNAMODB
+    name: AppointmentsTableSource
+    config:
+      tableName: ${self:custom.appNameU}Appointments-${self:custom.env}
+  - type: AMAZON_DYNAMODB
+    name: UserTableSource
+    config:
+      tableName: ${self:custom.appNameU}User-${self:custom.env}
+
+mappingTemplates:
+# Queries
+  - dataSource: AppointmentsTableSource
+    type: Query
+    field: getAppointments
+    request: query/get-appointments/request.vtl
+    response: common/generic-response.vtl
+# Mutations
+  - dataSource: UserTableSource
+    type: Mutation
+    field: addUser
+    request: 'mutation/add-user/request.vtl'
+    response: 'common/generic-response.vtl'

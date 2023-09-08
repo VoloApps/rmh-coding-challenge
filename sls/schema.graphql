@@ -1,0 +1,108 @@
+schema {
+  query: Query
+  mutation: Mutation
+}
+
+type Mutation {
+    addUser(input: AddUserInput!): User @aws_api_key @aws_iam
+}
+
+type Query {
+    getAppointments(
+    ptId: ID!
+    filter: TableAppointmentsFilterInput
+    limit: Int
+    nextToken: String
+  ): AppointmentsConnection @aws_api_key @aws_iam
+}
+
+type User @aws_api_key @aws_iam {
+  id: ID!
+  email: String
+  createdOn: AWSDateTime
+  acceptedTermsAndConditions: Boolean
+}
+
+input AddUserInput {
+  id: ID!
+  email: String!
+  createdOn: AWSDateTime!
+  acceptedTermsAndConditions: Boolean
+}
+
+type AppointmentsConnection @aws_api_key @aws_iam {
+  items: [Appointment]
+  nextToken: String
+  limit: Int
+}
+
+type Appointment @aws_api_key @aws_iam {
+  ptId: ID!
+  appointmentDate: AWSDateTime
+  patientName: String
+  createdOn: AWSDateTime
+  duration: Int
+  zoomUrl: String
+}
+
+input TableAppointmentsFilterInput {
+  appointmentDate: TableStringFilterInput
+}
+
+
+input TableBooleanFilterInput {
+  eq: Boolean
+  ne: Boolean
+}
+
+input TableFloatFilterInput {
+  between: [Float]
+  contains: Float
+  eq: Float
+  ge: Float
+  gt: Float
+  le: Float
+  lt: Float
+  ne: Float
+  notContains: Float
+}
+
+input TableIDFilterInput {
+  beginsWith: ID
+  between: [ID]
+  contains: ID
+  eq: ID
+  ge: ID
+  gt: ID
+  le: ID
+  lt: ID
+  ne: ID
+  in: [ID]
+  notContains: ID
+}
+
+input TableIntFilterInput {
+  between: [Int]
+  contains: Int
+  eq: Int
+  ge: Int
+  gt: Int
+  le: Int
+  lt: Int
+  ne: Int
+  notContains: Int
+}
+
+input TableStringFilterInput {
+  beginsWith: String
+  between: [String]
+  contains: String
+  eq: String
+  ge: String
+  gt: String
+  le: String
+  lt: String
+  ne: String
+  in: [String]
+  notContains: String
+}

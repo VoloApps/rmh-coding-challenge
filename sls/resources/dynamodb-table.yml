@@ -1,0 +1,34 @@
+Resources:
+  UserTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: ${self:custom.appNameU}User-${self:custom.env}
+      AttributeDefinitions:
+        - AttributeName: id
+          AttributeType: S
+      KeySchema:
+        - AttributeName: id # partition key
+          KeyType: HASH
+      BillingMode: PAY_PER_REQUEST
+  AppointmentsTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: ${self:custom.appNameU}Appointments-${self:custom.env}
+      AttributeDefinitions:
+        - AttributeName: ptId
+          AttributeType: S
+        - AttributeName: appointmentDate
+          AttributeType: S
+      KeySchema:
+        - AttributeName: ptId # partition key
+          KeyType: HASH
+        - AttributeName: appointmentDate # sort key
+          KeyType: RANGE
+      BillingMode: PAY_PER_REQUEST
+      GlobalSecondaryIndexes:
+        - IndexName: ptId-timestamp-index
+          KeySchema:
+            - AttributeName: ptId
+              KeyType: HASH
+          Projection:
+            ProjectionType: ALL
