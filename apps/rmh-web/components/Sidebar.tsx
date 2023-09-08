@@ -1,4 +1,5 @@
-"use client";import { AppointmentType } from "@/types/AppointmentType";
+"use client";
+import { AppointmentType } from "@/types/AppointmentType";
 import ClientListItem from "./common/ClientListItem";
 import Tabs from "./common/TabsContainer";
 import SeachInput from "./forms/SeachInput";
@@ -15,7 +16,6 @@ function Sidebar({ appoinments }: { appoinments: AppointmentType[] }) {
         tabs={[
           {
             label: "Today's",
-            isActive: true,
             content: (
               <>
                 <SeachInput />
@@ -30,7 +30,7 @@ function Sidebar({ appoinments }: { appoinments: AppointmentType[] }) {
               </>
             ),
           },
-          { label: "All", isActive: false },
+          { label: "All", content: <p>Easter Egg 🥚</p>, badge: 10 },
         ]}
       />
     </section>
