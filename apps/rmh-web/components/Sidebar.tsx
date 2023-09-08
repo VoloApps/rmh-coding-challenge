@@ -30,7 +30,7 @@ function Sidebar({ appoinments }: { appoinments: AppointmentType[] }) {
               </>
             ),
           },
-          { label: "All", content: <p>Easter Egg 🥚</p>, badge: 10 },
+          { label: "All", content: <p>Easter Egg 🥚</p>, badge: 7 },
         ]}
       />
     </section>
