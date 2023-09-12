@@ -35,8 +35,8 @@ export const {
 } = AuthSlice.actions
 
 // Other code such as selectors can use the imported `RootState` type
-export const selectIsAuthenticated = (state: RootState) => state.auth.isAuthenticated;
+export const selectIsAuthenticated = (state: RootState) => state?.auth?.isAuthenticated;
 
-export const selectPreAuthenticatedRoute = (state: RootState) => state.auth.preAuthenticatedRoute;
+export const selectPreAuthenticatedRoute = (state: RootState) => state?.auth?.preAuthenticatedRoute;
 
 export default AuthSlice.reducer
