@@ -4,6 +4,7 @@ import '@aws-amplify/ui-react/styles.css';
 import '../globals.css';
 import Head from 'next/head';
 import TopBar from '@/components/TopBar';
+import Appointments from '@/components/Appointments';
 
 
 export default function PTPortal() {
@@ -15,7 +16,8 @@ export default function PTPortal() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <TopBar />
-      <main className='flex min-h-screen justify-center w-full'>
+      <main className='flex min-h-screen w-full'>
+        <Appointments />
       </main>
 
     </section>
