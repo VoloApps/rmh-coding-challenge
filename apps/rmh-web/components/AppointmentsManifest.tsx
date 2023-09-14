@@ -1,11 +1,14 @@
 import React, {ChangeEventHandler, useEffect, useState, useRef} from 'react';
 import axios, {AxiosResponse} from "axios";
+import { useSelector } from "react-redux";
 import {Appointment, AppointmentResponse} from "@/app/pt-portal/models";
 import ClientListItem from "@/components/ClientListItem";
 import TabContainer from "@/components/TabContainer";
+import {getSelectedUser} from "@/features/appointmentSlice";
 
 const AppointmentsManifest = () => {
   const masterAppts = useRef<Appointment[]>([]);
+  const selectedUser = useSelector(getSelectedUser);
   const [appointments, setAppointments] = useState<Appointment[]>([]);
 
   const onSearchFieldChange: ChangeEventHandler<HTMLInputElement> = (event) => {
@@ -21,7 +24,7 @@ const AppointmentsManifest = () => {
         </div>
         <ul className="flex flex-col">
           {appointments.map((item, i) => {
-            return <ClientListItem name={item.patientName} key={`client${i}`} />
+            return <ClientListItem name={item.patientName} isSelected={item.patientName === selectedUser} key={`client${i}`} />
           })}
         </ul>
       </>

@@ -1,9 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
 import authReducer from "@/features/authSlice";
+import apptReducer from "@/features/appointmentSlice";
 
 export const store = configureStore({
   reducer: {
     auth: authReducer,
+    appt: apptReducer
   },
 })
 
