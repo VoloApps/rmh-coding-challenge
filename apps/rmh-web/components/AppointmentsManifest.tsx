@@ -47,7 +47,7 @@ const AppointmentsManifest = () => {
   }, []);
 
   return (
-    <section className='flex flex-col w-[400px] rounded-t-2xl bg-white'>
+    <section className='flex flex-col w-[400px] rounded-t-2xl bg-white mx-1'>
       <header className='p-6'>
         <span className='text-[22px] font-bold'>My Appointments</span>
       </header>
