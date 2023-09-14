@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { Appointment } from "./Appointments";
+import { useDispatch } from "react-redux";
+import { setAppointmentData } from "@/features/appointmentSlice";
 
 interface AppointmentCardProps {
     appointment: Appointment;
@@ -7,8 +9,11 @@ interface AppointmentCardProps {
 
 export const AppointmentsCard = ({ appointment }: AppointmentCardProps) => {
 
+    const dispatch = useDispatch();
+
     const saveApptInStore = () => {
         // to save appointment in store
+        dispatch(setAppointmentData(appointment));
     }
 
 
