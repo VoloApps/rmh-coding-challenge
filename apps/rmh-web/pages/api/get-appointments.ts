@@ -7,7 +7,7 @@ export default async function GET(request: NextApiRequest, response: NextApiResp
   const GRAPHQL_API_URL = process.env.GRAPHQL_API_URL ? process.env.GRAPHQL_API_URL : '';
   console.log(`API_KEY ${GRAPHQL_API_URL_API_KEY}, GRAPHQL_API_URL ${GRAPHQL_API_URL}`);
 
-  const query = `
+  const query = gql`
     query GetAppointmentsForPT { 
       getAppointments(ptId: "6b87d552-a2fe-465a-998c-1b288fee212f") { 
         items { 
@@ -26,7 +26,7 @@ export default async function GET(request: NextApiRequest, response: NextApiResp
     const config: AxiosRequestConfig = {
       url: GRAPHQL_API_URL,
       method: 'post',
-      data: JSON.stringify({ query }),
+      data: JSON.stringify({ query: query.loc?.source.body }),
       headers: {
         'Content-Type': 'application/json',
         'x-api-key': GRAPHQL_API_URL_API_KEY
