@@ -1,3 +1,4 @@
+import { RootState } from "@/lib/store";
 import { createSlice } from "@reduxjs/toolkit";
 
 export const AppointmentSlice = createSlice({
@@ -5,9 +6,11 @@ export const AppointmentSlice = createSlice({
   initialState: {},
   reducers: {
     selectAppointment: (state, action) => {
-      return action.payload;
+      state = action.payload;
     },
   },
 });
 
-export const { selectAppointment } = AppointmentSlice.actions;
+export const selectAppointment = (state: RootState) => state.appointment;
+
+export default AppointmentSlice.reducer;
