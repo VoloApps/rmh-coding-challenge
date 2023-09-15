@@ -23,18 +23,11 @@ export default function SidebarMenu({ menuItems }: SidebarMenuProps) {
 
   return (
     <div className="flex flex-col space-y-2">
-      {/* <input
-        type="text"
-        placeholder="Search client"
-        className="w-full px-4 py-2 border border-gray-200 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-600 my-4"
-        onChange={(e) => setFilter(e.target.value)}
-      /> */}
-
-      <div className="relative w-full">
+      <div className="relative w-full my-4">
         <input
           type="text"
           placeholder="Search client"
-          className="mt-4 w-full px-10 py-2 border border-gray-200 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-600"
+          className="w-full px-10 py-2 border border-gray-200 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-600"
           value={filter}
           onChange={(e) => setFilter(e.target.value)}
         />
@@ -47,7 +40,6 @@ export default function SidebarMenu({ menuItems }: SidebarMenuProps) {
           />
         </div>
       </div>
-
       {filteredMenuItems.map((item) => {
         return <SideBarItem key={item.id} {...item} />;
       })}
@@ -56,7 +48,6 @@ export default function SidebarMenu({ menuItems }: SidebarMenuProps) {
 }
 
 function SideBarItem({ avatarURL, text, icon }: MenuItem) {
-  // sidebar item is a menu item with avatar text and icon side by side
   return (
     <div className="flex items-center space-x-2 px-4 py-2 hover:bg-gray-100 cursor-pointer">
       {/* eslint-disable-next-line @next/next/no-img-element */}
