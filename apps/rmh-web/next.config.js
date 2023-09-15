@@ -1,4 +1,14 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {}
+const nextConfig = {
+  webpack: (config, { webpack, isServer, nextRuntime }) => {
+    if (isServer && nextRuntime === "nodejs")
+      config.plugins.push(
+        new webpack.IgnorePlugin({ resourceRegExp: /^aws-crt$/ }),
+        new webpack.IgnorePlugin({ resourceRegExp: /^encoding$/ })
+      );
 
-module.exports = nextConfig
+    return config;
+  },
+};
+
+module.exports = nextConfig;
