@@ -1,6 +1,7 @@
 import { SearchList } from "./SearchList";
-import { getPatientList } from "./action";
-import { result } from "./mockData";
+import { getClient } from "@/app/graphql-clients";
+import { QueryAppointmentListDocument } from "@/app/generated-graphql-types/rmh";
+import { transformAppointments } from "@/app/utils";
 
 type SideBarProps = {};
 
@@ -19,19 +20,29 @@ type SideBarProps = {};
  *          - Tab Filter (Client)
  *          - SearchBox (Client) -
  *          - ResultList (Client)
- *
  */
-
+/**
+ * Server Components for Patient Portal Side Bar
+ * @returns
+ */
 export const SideBar: React.FC<SideBarProps> = async () => {
-  const patientList = await getPatientList();
-  //   const data = result.data.getAppointments.items;
+  const { data, error } = await getClient().query(
+    QueryAppointmentListDocument,
+    {}
+  );
+
+  if (error) {
+    <div>Error Occurred</div>;
+  }
+
+  const appointments = transformAppointments(data);
 
   return (
-    <aside className="flex flex-col flex-[0_0_400px] h-full border-r-[1px] bg-white rounded-2xl">
-      <h2 className="text-black leading-4 p-6 text-[22px] font-bold flex-[0_0_64px]">
+    <aside className="flex flex-col w-[400px] h-full border-r-[1px] bg-white rounded-2xl">
+      <h2 className="text-black leading-4 p-6 text-[22px] font-bold flex flex-none">
         My Appointments
       </h2>
-      <SearchList items={patientList} />
+      <SearchList className="flex flex-1 min-h-0" items={appointments} />
     </aside>
   );
 };
