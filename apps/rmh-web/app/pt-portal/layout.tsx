@@ -1,25 +1,21 @@
-'use client'
-import '../globals.css';
+"use client";
+import "../globals.css";
 
-import React from 'react';
-import ReduxProvider from '@/components/redux-provider';
+import React from "react";
+import ReduxProvider from "@/components/redux-provider";
 
 interface PTPortalLayoutProps {
-    children: React.ReactNode;
+  children: React.ReactNode;
 }
 
 const PTPortalLayout: React.FC<PTPortalLayoutProps> = ({ children }) => {
-
-    return (
-        <ReduxProvider>
-            <div className='pt-layout'>
-                <section className="main-content">
-                    {children}
-                </section>
-            </div>
-        </ReduxProvider>
-    );
-}
+  return (
+    <ReduxProvider>
+      <div className="pt-layout h-screen">
+        <section className="main-content h-screen">{children}</section>
+      </div>
+    </ReduxProvider>
+  );
+};
 
 export default PTPortalLayout;
-

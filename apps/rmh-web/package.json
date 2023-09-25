@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "codegen": "graphql-codegen"
   },
   "dependencies": {
     "@aws-amplify/ui-react": "^5.2.0",
@@ -18,20 +19,28 @@
     "autoprefixer": "10.4.15",
     "aws-amplify": "^5.3.10",
     "axios": "^1.4.0",
+    "clsx": "^2.0.0",
     "eslint": "8.47.0",
     "eslint-config-next": "13.4.19",
     "graphql": "^16.8.0",
     "graphql-tag": "^2.12.6",
     "jsrsasign": "^10.8.6",
+    "lodash.debounce": "^4.0.8",
     "next": "13.4.19",
     "postcss": "8.4.28",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-redux": "^8.1.2",
     "tailwindcss": "3.3.3",
-    "typescript": "5.1.6"
+    "typescript": "5.1.6",
+    "urql": "^4.0.5"
   },
   "devDependencies": {
-    "@types/jsrsasign": "^10.5.8"
+    "@graphql-codegen/cli": "^5.0.0",
+    "@graphql-codegen/typed-document-node": "^5.0.1",
+    "@graphql-codegen/typescript": "^4.0.1",
+    "@graphql-codegen/typescript-operations": "^4.0.1",
+    "@types/jsrsasign": "^10.5.8",
+    "@types/lodash.debounce": "^4.0.7"
   }
 }
