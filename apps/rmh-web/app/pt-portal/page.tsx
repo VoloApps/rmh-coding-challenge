@@ -8,7 +8,7 @@ import SideBar from "@/components/SideBar";
 import { useUsers } from "./hooks";
 
 export default function PTPortal() {
-  const users = useUsers();
+  const { isLoading, users } = useUsers();
 
   return (
     <section>
@@ -18,7 +18,7 @@ export default function PTPortal() {
       </Head>
       <TopBar />
       <main className="flex min-h-screen w-full">
-        <SideBar users={users} />
+        <SideBar isLoading={isLoading} users={users} />
       </main>
     </section>
   );

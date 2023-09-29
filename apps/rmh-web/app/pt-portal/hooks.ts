@@ -8,24 +8,32 @@ import { User } from "./models";
 
 export const useUsers = () => {
   const [users, setUsers] = useState<User[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     const loadAppointments = async () => {
-      const { data }: { data: User[] } = await axios.get(
-        "http://localhost:3000/api/get-appointments"
-      );
+      try {
+        setIsLoading(true);
+        const { data }: { data: User[] } = await axios.get(
+          "http://localhost:3000/api/get-appointments"
+        );
 
-      const sortedData = data.sort(
-        (a, b) =>
-          new Date(a.appointmentDate).getTime() -
-          new Date(b.appointmentDate).getTime()
-      );
+        const sortedData = data.sort(
+          (a, b) =>
+            new Date(a.appointmentDate).getTime() -
+            new Date(b.appointmentDate).getTime()
+        );
 
-      setUsers(sortedData);
+        setUsers(sortedData);
+      } catch (err) {
+        throw err;
+      } finally {
+        setIsLoading(false);
+      }
     };
 
     loadAppointments();
   }, []);
 
-  return users;
+  return { isLoading, users };
 };

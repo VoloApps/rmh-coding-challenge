@@ -10,7 +10,13 @@ import { selectUsers } from "@/features/usersSlice";
 
 const tabs = ["Today's", "All"];
 
-const SideBar = ({ users }: { users: User[] }) => {
+const SideBar = ({
+  isLoading,
+  users,
+}: {
+  isLoading: boolean;
+  users: User[];
+}) => {
   const [search, setSearch] = useState("");
   const [activeIndex, setActiveIndex] = useState(0);
   const state = useSelector(selectUsers);
@@ -58,7 +64,11 @@ const SideBar = ({ users }: { users: User[] }) => {
         />
       </div>
       <div>
-        <UsersList users={finalUsers} />
+        {isLoading ? (
+          <div className="px-4">loading...</div>
+        ) : (
+          <UsersList users={finalUsers} />
+        )}
       </div>
     </div>
   );
