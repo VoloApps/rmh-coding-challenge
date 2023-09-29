@@ -12,10 +12,7 @@ const UserItem = ({ user }: { user: User }) => {
 
   return (
     <div
-      onClick={() => {
-        console.log("adding user");
-        dispatch(setUsers(user));
-      }}
+      onClick={() => dispatch(setUsers(user))}
       className={`flex items-center justify-between p-4 hover:bg-[#EFF3FC] transition-all duration-250 ${selectedStyles}`}
     >
       <div className="flex items-center gap-4">
