@@ -20,6 +20,17 @@ export const UserSlice = createSlice({
   reducers: {
     // Use the PayloadAction type to declare the contents of `action.payload`
     setUsers: (state, action: PayloadAction<User>) => {
+      const exists = state.selectedUsers.find(
+        (user) => user.patientName === action.payload.patientName
+      );
+      if (exists) {
+        state.selectedUsers = state.selectedUsers.filter(
+          (selectedUser) =>
+            selectedUser.patientName !== action.payload.patientName
+        );
+        return;
+      }
+
       state.selectedUsers = [...state.selectedUsers, action.payload];
     },
   },
@@ -27,12 +38,10 @@ export const UserSlice = createSlice({
 
 export const { setUsers } = UserSlice.actions;
 
-//   export const selectIsAuthenticated = (state: RootState) => state.
-// // Other code such as selectors can use the imported `RootState` type
-// export const     setUsers: (state, action: PayloadAction<boolean>) => {
-//     = (state: RootState) =>
-//   state.auth.isAuthenticated;
-
 export const selectUsers = (state: RootState) => state.users.selectedUsers;
+export const isSelected = (state: RootState) => (user: User) =>
+  state.users.selectedUsers.find(
+    (selectedUser) => selectedUser.patientName === user.patientName
+  );
 
 export default UserSlice.reducer;

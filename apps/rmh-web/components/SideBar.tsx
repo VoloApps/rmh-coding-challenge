@@ -15,9 +15,6 @@ const SideBar = ({ users }: { users: User[] }) => {
   const [activeIndex, setActiveIndex] = useState(0);
   const state = useSelector(selectUsers);
 
-  console.log("users");
-  console.log(state);
-
   const finalUsers = useMemo(() => {
     const userFilter = (user: User) =>
       new Date(user.appointmentDate).getTime() > new Date().getTime();

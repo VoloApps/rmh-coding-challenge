@@ -1,10 +1,23 @@
 import { User } from "@/app/pt-portal/models";
 import Image from "next/image";
-import { setUsers } from "@/features/usersSlice";
+import { isSelected, setUsers } from "@/features/usersSlice";
+import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
+import clsx from "clsx";
 
 const UserItem = ({ user }: { user: User }) => {
+  const dispatch = useDispatch();
+  const userSelected = useSelector(isSelected)(user);
+  const selectedStyles = clsx(userSelected && "text-[#2B478B]");
+
   return (
-    <div className="flex items-center justify-between p-4 hover:bg-[#EFF3FC] transition-all duration-250">
+    <div
+      onClick={() => {
+        console.log("adding user");
+        dispatch(setUsers(user));
+      }}
+      className={`flex items-center justify-between p-4 hover:bg-[#EFF3FC] transition-all duration-250 ${selectedStyles}`}
+    >
       <div className="flex items-center gap-4">
         <Image
           src="/profile-icon.svg"
