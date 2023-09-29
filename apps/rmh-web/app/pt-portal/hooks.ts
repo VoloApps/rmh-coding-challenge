@@ -6,7 +6,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { User } from "./models";
 
-export const useUsers = () => {
+export const useUsers = (ptid: string) => {
   const [users, setUsers] = useState<User[]>([]);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -15,7 +15,7 @@ export const useUsers = () => {
       try {
         setIsLoading(true);
         const { data }: { data: User[] } = await axios.get(
-          "http://localhost:3000/api/get-appointments?ptdid=6b87d552-a2fe-465a-998c-1b288fee212f"
+          `http://localhost:3000/api/get-appointments?ptdid=${ptid}`
         );
 
         const sortedData = data.sort(
@@ -33,7 +33,7 @@ export const useUsers = () => {
     };
 
     loadAppointments();
-  }, []);
+  }, [ptid]);
 
   return { isLoading, users };
 };

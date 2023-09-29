@@ -8,7 +8,7 @@ import SideBar from "@/components/SideBar";
 import { useUsers } from "./hooks";
 
 export default function PTPortal() {
-  const { isLoading, users } = useUsers();
+  const { isLoading, users } = useUsers("6b87d552-a2fe-465a-998c-1b288fee212f");
 
   return (
     <section>
