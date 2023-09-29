@@ -4,31 +4,11 @@ import "@aws-amplify/ui-react/styles.css";
 import "../globals.css";
 import Head from "next/head";
 import TopBar from "@/components/TopBar";
-import axios from "axios";
-import { useEffect, useState } from "react";
-import { User } from "./models";
 import SideBar from "@/components/SideBar";
+import { useUsers } from "./hooks";
 
 export default function PTPortal() {
-  const [users, setUsers] = useState<User[]>([]);
-
-  useEffect(() => {
-    const loadAppointments = async () => {
-      const { data }: { data: User[] } = await axios.get(
-        "http://localhost:3000/api/get-appointments"
-      );
-
-      const sortedData = data.sort(
-        (a, b) =>
-          new Date(a.appointmentDate).getTime() -
-          new Date(b.appointmentDate).getTime()
-      );
-
-      setUsers(sortedData);
-    };
-
-    loadAppointments();
-  }, []);
+  const users = useUsers();
 
   return (
     <section>
