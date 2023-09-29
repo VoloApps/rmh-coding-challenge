@@ -5,23 +5,11 @@ import { useMemo, useState } from "react";
 
 import UsersList from "./UsersList";
 import Tab from "./Tab";
-import { useSelector } from "react-redux";
-import { selectUsers } from "@/features/usersSlice";
 
 const tabs = ["Today's", "All"];
 
-const SideBar = ({
-  isLoading,
-  users,
-}: {
-  isLoading: boolean;
-  users: User[];
-}) => {
-  const [search, setSearch] = useState("");
-  const [activeIndex, setActiveIndex] = useState(0);
-  const state = useSelector(selectUsers);
-
-  const finalUsers = useMemo(() => {
+const useFinalUsers = (activeIndex: number, search: string, users: User[]) =>
+  useMemo(() => {
     const userFilter = (user: User) =>
       new Date(user.appointmentDate).getTime() > new Date().getTime();
     const filteredUsers = activeIndex === 0 ? users.filter(userFilter) : users;
@@ -32,6 +20,17 @@ const SideBar = ({
         )
       : filteredUsers;
   }, [activeIndex, search, users]);
+
+const SideBar = ({
+  isLoading,
+  users,
+}: {
+  isLoading: boolean;
+  users: User[];
+}) => {
+  const [search, setSearch] = useState("");
+  const [activeIndex, setActiveIndex] = useState(0);
+  const finalUsers = useFinalUsers(activeIndex, search, users);
 
   return (
     <div className="h-full bg-white w-100">
