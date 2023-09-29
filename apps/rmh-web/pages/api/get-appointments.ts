@@ -1,25 +1,25 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import { request as GQLRequest, gql } from "graphql-request";
 
-const document = gql`
-  query MyQuery {
-    getAppointments(ptId: "6b87d552-a2fe-465a-998c-1b288fee212f") {
-      items {
-        appointmentDate
-        createdOn
-        duration
-        patientName
-        ptId
-        zoomUrl
-      }
-    }
-  }
-`;
-
 export default async function GET(
   request: NextApiRequest,
   response: NextApiResponse
 ) {
+  const document = gql`
+query MyQuery {
+  getAppointments(ptId: "${request.query.ptdid}") {
+    items {
+      appointmentDate
+      createdOn
+      duration
+      patientName
+      ptId
+      zoomUrl
+    }
+  }
+}
+`;
+
   const GRAPHQL_API_URL_API_KEY = process.env.GRAPHQL_API_URL_API_KEY
     ? process.env.GRAPHQL_API_URL_API_KEY
     : "";

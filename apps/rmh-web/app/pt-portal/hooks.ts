@@ -15,7 +15,7 @@ export const useUsers = () => {
       try {
         setIsLoading(true);
         const { data }: { data: User[] } = await axios.get(
-          "http://localhost:3000/api/get-appointments"
+          "http://localhost:3000/api/get-appointments?ptdid=6b87d552-a2fe-465a-998c-1b288fee212f"
         );
 
         const sortedData = data.sort(
