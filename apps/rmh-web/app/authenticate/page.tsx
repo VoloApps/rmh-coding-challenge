@@ -1,15 +1,19 @@
-'use client'
+"use client";
 
-import '@aws-amplify/ui-react/styles.css';
-import Head from 'next/head';
-import { useEffect } from 'react';
-import { Amplify, Hub } from 'aws-amplify';
+import "@aws-amplify/ui-react/styles.css";
+import Head from "next/head";
+import { useEffect } from "react";
+import { Amplify, Hub } from "aws-amplify";
 // TODO Comment Back In
 // import awsExports from '../../aws-exports';
-import { Authenticator, useTheme, Heading } from '@aws-amplify/ui-react';
-import { useDispatch, useSelector } from 'react-redux';
-import { selectIsAuthenticated, selectPreAuthenticatedRoute, setIsAuthenticated } from '@/features/authSlice';
-import { useRouter } from 'next/navigation'
+import { Authenticator, useTheme, Heading } from "@aws-amplify/ui-react";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  selectIsAuthenticated,
+  selectPreAuthenticatedRoute,
+  setIsAuthenticated,
+} from "@/features/authSlice";
+import { useRouter } from "next/navigation";
 
 // TODO Comment Back In
 // Amplify.configure({
@@ -17,7 +21,6 @@ import { useRouter } from 'next/navigation'
 // });
 
 export default function Authenticate() {
-
   const router = useRouter();
   const dispatch = useDispatch();
 
@@ -25,34 +28,34 @@ export default function Authenticate() {
   const preAuthenticatedRoute = useSelector(selectPreAuthenticatedRoute);
 
   useEffect(() => {
-    console.log(`isAuthenticated ${isAuthenticated}`)
-    console.log(`preAuthenticatedRoute ${preAuthenticatedRoute}`)
+    console.log(`isAuthenticated ${isAuthenticated}`);
+    console.log(`preAuthenticatedRoute ${preAuthenticatedRoute}`);
 
     if (isAuthenticated && preAuthenticatedRoute) {
       router.push(preAuthenticatedRoute);
     }
-  }, [isAuthenticated, preAuthenticatedRoute])
+  }, [isAuthenticated, preAuthenticatedRoute]);
 
   useEffect(() => {
     const listener = async (data: any) => {
-      console.log(data.payload.event)
+      console.log(data.payload.event);
       switch (data.payload.event) {
-        case 'signIn':
-          console.log('signed in');
+        case "signIn":
+          console.log("signed in");
           dispatch(setIsAuthenticated(true));
           break;
-        case 'signUp':
-          console.log('signed up');
+        case "signUp":
+          console.log("signed up");
           break;
-        case 'signOut':
+        case "signOut":
           break;
         default:
           break;
       }
     };
 
-    Hub.listen('auth', listener);
-    return () => Hub.remove('auth', listener);
+    Hub.listen("auth", listener);
+    return () => Hub.remove("auth", listener);
   }, []);
 
   // more customization here https://ui.docs.amplify.aws/react/connected-components/authenticator/customization#headers--footers
@@ -91,7 +94,7 @@ export default function Authenticate() {
         <title>RMH Authenticate</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className='flex min-h-screen flex-col p-24 gap-8 w-full'>
+      <main className="flex min-h-screen flex-col p-24 gap-8 w-full">
         <Authenticator components={components} />
       </main>
     </section>
