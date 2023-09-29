@@ -1,5 +1,12 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import { request as GQLRequest, gql } from "graphql-request";
+import { User } from "@/app/pt-portal/models";
+
+interface Result {
+  getAppointments: {
+    items: User[];
+  };
+}
 
 export default async function GET(
   request: NextApiRequest,
@@ -30,10 +37,14 @@ query MyQuery {
     `API_KEY ${GRAPHQL_API_URL_API_KEY}, GRAPHQL_API_URL ${GRAPHQL_API_URL}`
   );
 
-  const result = await GQLRequest(GRAPHQL_API_URL, document, undefined, {
-    "x-api-key": GRAPHQL_API_URL_API_KEY,
-  });
+  const result: Result = await GQLRequest(
+    GRAPHQL_API_URL,
+    document,
+    undefined,
+    {
+      "x-api-key": GRAPHQL_API_URL_API_KEY,
+    }
+  );
 
-  // @ts-ignore todo: fix types
   response.status(200).json(result.getAppointments.items);
 }

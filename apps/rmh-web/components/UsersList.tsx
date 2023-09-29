@@ -8,13 +8,13 @@ import clsx from "clsx";
 const UserItem = ({ user }: { user: User }) => {
   const dispatch = useDispatch();
   const userSelected = useSelector(isSelected)(user);
-  const selectedStyles = clsx(userSelected && "text-[#2B478B]");
+  const selectedStyles = clsx(
+    `flex items-center justify-between p-4 hover:bg-[#EFF3FC] transition-all duration-250`,
+    userSelected && "text-[#2B478B]"
+  );
 
   return (
-    <div
-      onClick={() => dispatch(setUsers(user))}
-      className={`flex items-center justify-between p-4 hover:bg-[#EFF3FC] transition-all duration-250 ${selectedStyles}`}
-    >
+    <div onClick={() => dispatch(setUsers(user))} className={selectedStyles}>
       <div className="flex items-center gap-4">
         <Image
           src="/profile-icon.svg"
