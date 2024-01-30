@@ -1,13 +1,18 @@
 import { configureStore } from "@reduxjs/toolkit";
 import authReducer from "@/features/authSlice";
+import appointmentReducer from "@/features/appointmentSlice";
+import { Provider } from "react-redux";
 
-export const store = configureStore({
+const store = configureStore({
   reducer: {
     auth: authReducer,
+    appointment: appointmentReducer,
   },
-})
+});
 
 // Infer the `RootState` and `AppDispatch` types from the store itself
-export type RootState = ReturnType<typeof store.getState>
+export type RootState = ReturnType<typeof store.getState>;
 // Inferred type: {posts: PostsState, comments: CommentsState, users: UsersState}
-export type AppDispatch = typeof store.dispatch
+export type AppDispatch = typeof store.dispatch;
+
+export { store, Provider as ReduxProvider };

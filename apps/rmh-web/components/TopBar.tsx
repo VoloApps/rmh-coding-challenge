@@ -1,7 +1,8 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
-import { selectIsAuthenticated } from '@/features/authSlice';
-import { Auth } from 'aws-amplify';
+"use client";
+import React from "react";
+import { useSelector } from "react-redux";
+import { selectIsAuthenticated } from "@/features/authSlice";
+import { Auth } from "aws-amplify";
 
 const TopBar = () => {
   const isAuthenticated = useSelector(selectIsAuthenticated);
@@ -10,7 +11,7 @@ const TopBar = () => {
     try {
       await Auth.signOut();
     } catch (error) {
-      console.error('Error signing out:', error);
+      console.error("Error signing out:", error);
     }
   };
 
