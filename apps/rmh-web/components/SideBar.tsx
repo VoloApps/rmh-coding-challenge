@@ -8,7 +8,6 @@ const tabs = ["Upcoming Appointments", "Past Appointments"];
 
 const useFinalUsers = (search: string, users: User[]) =>
   useMemo(() => {
-
     return search.trim().length > 0
       ? users.filter((user) =>
           user.patientName.toLowerCase().startsWith(search)
