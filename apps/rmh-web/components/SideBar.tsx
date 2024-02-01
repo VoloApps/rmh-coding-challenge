@@ -2,24 +2,19 @@
 import { User } from "@/app/pt-portal/models";
 import Image from "next/image";
 import { useMemo, useState } from "react";
-
 import UsersList from "./UsersList";
 import Tab from "./Tab";
-
 const tabs = ["Upcoming Appointments", "Past Appointments"];
 
-const useFinalUsers = (activeIndex: number, search: string, users: User[]) =>
+const useFinalUsers = (search: string, users: User[]) =>
   useMemo(() => {
-    const userFilter = (user: User) =>
-      new Date(user.appointmentDate).getTime() > new Date().getTime();
-    const filteredUsers = activeIndex === 0 ? users.filter(userFilter) : users;
 
     return search.trim().length > 0
-      ? filteredUsers.filter((user) =>
+      ? users.filter((user) =>
           user.patientName.toLowerCase().startsWith(search)
         )
-      : filteredUsers;
-  }, [activeIndex, search, users]);
+      : users;
+  }, [search, users]);
 
 const SideBar = ({
   users,
@@ -28,7 +23,7 @@ const SideBar = ({
 }) => {
   const [search, setSearch] = useState("");
   const [activeIndex, setActiveIndex] = useState(0);
-  const finalUsers = useFinalUsers(activeIndex, search, users);
+  const finalUsers = useFinalUsers(search, users);
 
   return (
     <div className="h-full bg-white w-100 p-0.5 rounded-t-lg">
@@ -60,7 +55,7 @@ const SideBar = ({
           onChange={(e) => setSearch(e.target.value)}
         />
       </div>
-          <UsersList users={users} />
+          <UsersList users={finalUsers} />
     </div>
   );
 };
