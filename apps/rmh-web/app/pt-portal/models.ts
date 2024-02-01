@@ -4,6 +4,10 @@ export interface Client {
 }
 
 export interface User {
-    id: string;
-    name: string;
+    ptId: string;
+    appointmentDate: string;
+    createdOn: string;
+    duration: number;
+    patientName: string;
+    zoomUrl: string;
 }
